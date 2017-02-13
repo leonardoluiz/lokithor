@@ -1,9 +1,8 @@
-package com.lokithor.lokithor.service;
+package com.lokithor.geotracking.service;
 
-import com.lokithor.lokithor.domain.TrackingRecord;
+import com.lokithor.geotracking.domain.TrackingRecord;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.UUID;

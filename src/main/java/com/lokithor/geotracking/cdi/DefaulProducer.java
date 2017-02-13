@@ -1,4 +1,4 @@
-package com.lokithor.lokithor.cdi;
+package com.lokithor.geotracking.cdi;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;

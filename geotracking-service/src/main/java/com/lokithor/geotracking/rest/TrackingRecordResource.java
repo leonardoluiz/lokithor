@@ -1,12 +1,10 @@
-package com.lokithor.lokithor.rest;
+package com.lokithor.geotracking.rest;
 
 
-import com.lokithor.lokithor.domain.TrackingRecord;
-import com.lokithor.lokithor.service.TrackingRecordService;
+import com.lokithor.geotracking.domain.TrackingRecord;
+import com.lokithor.geotracking.service.TrackingRecordService;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.GET;

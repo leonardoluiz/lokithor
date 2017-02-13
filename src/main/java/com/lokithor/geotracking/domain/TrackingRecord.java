@@ -1,4 +1,4 @@
-package com.lokithor.lokithor.domain;
+package com.lokithor.geotracking.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

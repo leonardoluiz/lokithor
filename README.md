@@ -9,7 +9,7 @@
 * Clone:
 * $ git clone https://github.com/leonardoluiz/lokithor.git
 * Run:	
-* $ cd devicemonitor-service
+* $ cd geotracking-service
 * $ mvn wildfly-swarm:run
 * Send a tracking record
 ```
