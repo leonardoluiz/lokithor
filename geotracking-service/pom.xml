@@ -2,10 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.lokithor</groupId>
-  <artifactId>device-monitor-service</artifactId>
-  <name>Device Monitor Service</name>
-  <version>1.0.0-SNAPSHOT</version>
+
+  <parent>
+    <groupId>com.lokithor</groupId>
+    <artifactId>lokithor</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>geotracking-service</artifactId>
+  <name>Lokithor - Geotracking Service</name>
   <packaging>war</packaging>
 
   <properties>
@@ -29,7 +34,7 @@
   </dependencyManagement>
 
   <build>
-    <finalName>device-monitor-service</finalName>
+    <finalName>geotracking-service</finalName>
     <plugins>
       <plugin>
         <groupId>org.wildfly.swarm</groupId>
@@ -54,18 +59,35 @@
       <version>7.0</version>
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <version>1.0.0.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.187</version>
+    </dependency>
     <!-- WildFly Swarm Fractions -->
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>jpa</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>jaxrs</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <version>2.4.0</version>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>cdi</artifactId>
     </dependency>
 
-
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>ejb</artifactId>
+    </dependency>
   </dependencies>
 </project>

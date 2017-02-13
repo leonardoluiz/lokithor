@@ -1,21 +1,19 @@
-package com.lokithor.devicemonitor.domain;
+package com.lokithor.lokithor.domain;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-/**
- * Device tracking record
- *
- */
+@Entity
 public class TrackingRecord {
 
+    @Id
     private String id;
     private Long latitude;
     private Long longitude;
     private Long altitude;
     private String deviceId;
     private String time;
+
 
     public String getId() {
         return id;
@@ -63,17 +61,5 @@ public class TrackingRecord {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "TrackingRecord{" +
-                "id='" + id + '\'' +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", altitude=" + altitude +
-                ", deviceId='" + deviceId + '\'' +
-                ", time=" + time +
-                '}';
     }
 }
