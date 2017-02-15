@@ -1,19 +1,41 @@
 package com.lokithor.geotracking.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
+@NamedQueries({
+        @NamedQuery(name = TrackingRecord.QUERY_LAST_ACTIVE_RECORDS,
+                query = "select t from TrackingRecord t"),
+        @NamedQuery(name =  TrackingRecord.QUERY_LAST_RECORDS,
+                query = "select new com.lokithor.geotracking.domain.TrackingRecordItemDTO(r.latitude,r.longitude,r.altitude,r.time) from TrackingRecord r where r.device.deviceId = :deviceId order by r.time")
+})
 @Entity
 public class TrackingRecord {
 
+    public static final String QUERY_LAST_RECORDS = "queryLastRecords";
+
+    public static final String QUERY_LAST_ACTIVE_RECORDS = "queryLastActiveRecords";
+
     @Id
     private String id;
-    private Long latitude;
-    private Long longitude;
-    private Long altitude;
-    private String deviceId;
-    private String time;
+    private Float latitude;
+    private Float longitude;
+    private Float altitude;
+    @ManyToOne
+    @JoinColumn(name="deviceId")
+    private Device device;
+    private Date time;
 
+    @Transient
+    private String deviceId;
+
+    public Device getDevice() {
+        return this.device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
 
     public String getId() {
         return id;
@@ -23,27 +45,27 @@ public class TrackingRecord {
         this.id = id;
     }
 
-    public Long getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 
-    public Long getAltitude() {
+    public Float getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(Long altitude) {
+    public void setAltitude(Float altitude) {
         this.altitude = altitude;
     }
 
@@ -55,11 +77,11 @@ public class TrackingRecord {
         this.deviceId = deviceId;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 }

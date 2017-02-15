@@ -1,0 +1,1 @@
+insert into device (deviceId) values ('123456');
