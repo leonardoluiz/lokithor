@@ -1,6 +1,5 @@
 package com.lokithor.geotracking.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class TrackingRecordDTO {
     private String deviceId;
     private List<TrackingRecordItemDTO> records;
 
-    public TrackingRecordDTO(String deviceId,List<TrackingRecordItemDTO> records) {
+    public TrackingRecordDTO(String deviceId, List<TrackingRecordItemDTO> records) {
         this.deviceId = deviceId;
         this.records = Collections.unmodifiableList(records);
     }

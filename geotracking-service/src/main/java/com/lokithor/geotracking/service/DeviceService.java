@@ -1,6 +1,7 @@
 package com.lokithor.geotracking.service;
 
 import com.lokithor.geotracking.domain.Device;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
