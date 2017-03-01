@@ -15,6 +15,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maps.key>${env.MAPS_KEY}</maps.key>
     </properties>
 
     <dependencyManagement>
@@ -30,6 +31,7 @@
     </dependencyManagement>
 
     <build>
+
         <finalName>dashboard</finalName>
         <plugins>
             <plugin>
@@ -79,6 +81,15 @@
                             <failOnMissingWebXml>false</failOnMissingWebXml>
                             <outputDirectory>target</outputDirectory>
                             <warName>ROOT</warName>
+                            <webResources>
+                                <resource>
+                                    <directory>${basedir}/src/main/webapp</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/index.html</include>
+                                    </includes>
+                                </resource>
+                            </webResources>
                         </configuration>
                     </plugin>
                 </plugins>

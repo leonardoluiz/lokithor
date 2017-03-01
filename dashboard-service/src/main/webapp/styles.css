@@ -14,6 +14,17 @@
  * limitations under the License.
  */
 
+.demo-card-wide {
+    margin:50px;
+    height: 600px;
+    width: 1280px;
+}
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
