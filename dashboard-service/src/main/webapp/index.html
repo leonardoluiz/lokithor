@@ -142,17 +142,38 @@
         </defs>
       </svg>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-      function initMap() {
+		var map = null;
+		
+        function executeQuery() {
+			  $.ajax({
+          	    url: 'api/devicelocation',
+          	    success: function(data) {
+          	      $(data).each(function(index,location){
+          	    	  var coord = { lat: location.latitude, lng: location.longitude };  
+          	    	  var marker = new google.maps.Marker({
+          	    		    position: coord,
+          	    		    map: map,
+          	    		    title: location.deviceId + ' ' + location.time
+          	    		  });
+              	  });
+          	    setTimeout(executeQuery, 5000); 
+          	    }
+          	  });
+       }
+
+    function initMap() {
         // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -19.9339883, lng: -43.9389098},
-          scrollwheel: false,
-          zoom: 8
-        });
-      }
+    	map = new google.maps.Map(document.getElementById('map'), {
+      	    center: {lat: -19.9339883, lng: -43.9389098},
+      	    scrollwheel: false,
+      	    zoom: 15
+    	    });
+    	setTimeout(executeQuery, 5000); 
+	}
+       	
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=${maps.key}&callback=initMap" async defer></script>
-
   </body>
 </html>
