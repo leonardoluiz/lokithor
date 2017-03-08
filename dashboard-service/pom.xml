@@ -16,6 +16,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maps.key>${env.MAPS_KEY}</maps.key>
+        <geotrackingServiceUrl>${env.GEOTRACKING_URL}</geotrackingServiceUrl>
     </properties>
 
     <dependencyManagement>
@@ -33,6 +34,14 @@
     <build>
 
         <finalName>dashboard</finalName>
+        
+        <resources>
+        	<resource>
+        		<directory>src/main/resources</directory>
+        		<filtering>true</filtering>
+        	</resource>
+        </resources>
+        
         <plugins>
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>
