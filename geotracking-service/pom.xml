@@ -40,7 +40,6 @@
                 <configuration>
                     <properties>
                         <swarm.bind.address>0.0.0.0</swarm.bind.address>
-
                     </properties>
                 </configuration>
                 <executions>
@@ -51,56 +50,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.14.1</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>${docker.group.name}/${project.artifactId}</name>
-                            <build>
-                                <from>java:openjdk-8-jdk</from>
-                                <maintainer>siamak@redhat.com</maintainer>
-                                <tags>
-                                    <tag>latest</tag>
-                                    <tag>${project.version}</tag>
-                                </tags>
-                                <ports>
-                                    <port>8080</port>
-                                </ports>
-                                <entryPoint>
-                                    <exec>
-                                        <arg>java</arg>
-                                        <arg>-jar</arg>
-                                        <arg>/opt/${project.artifactId}-swarm.jar</arg>
-                                    </exec>
-                                </entryPoint>
-                                <assembly>
-                                    <basedir>/</basedir>
-                                    <inline>
-                                        <files>
-                                            <file>
-                                                <source>${project.build.directory}/${project.artifactId}-swarm.jar
-                                                </source>
-                                                <outputDirectory>/opt</outputDirectory>
-                                            </file>
-                                        </files>
-                                    </inline>
-                                </assembly>
-                            </build>
-                            <run>
-                                <ports>
-                                    <port>http.port:8080</port>
-                                </ports>
-                            </run>
-                        </image>
-                    </images>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 
@@ -151,29 +100,5 @@
 
     </dependencies>
 
-    <profiles>
-        <profile>
-            <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
-            <!-- Use this profile for any OpenShift specific customization your app will need. -->
-            <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
-            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-            <id>openshift</id>
-            <build>
-                <finalName>geotracking-service</finalName>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>2.3</version>
-                        <configuration>
-                            <failOnMissingWebXml>false</failOnMissingWebXml>
-                            <outputDirectory>target</outputDirectory>
-                            <warName>ROOT</warName>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
 
