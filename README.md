@@ -1,24 +1,117 @@
-# LokiThor
+Lokithor
+===================
 
-# A GPS device/vehicle tracking system
+This project simulates a A GPS device/vehicle tracking system. It's a sample project build on [**Wildfly Swarm**](http://wildfly-swarm.io/).
 
-*You will need JDK 8.*
+This application is composed by two different services:
 
-##Usage:
+* **geolocation-service**: responsible for store device and geolocation records.
+* **dashboard-service**: responsible for the user interface where devices can be tracked.
 
-* Clone:
-* $ git clone https://github.com/leonardoluiz/lokithor.git
-* Run:	
-* $ cd geotracking-service
-* $ mvn wildfly-swarm:run
-* Send a tracking record
+
+
+----------
+
+> **Pre-requisites:**
+
+> - JDK 8+.
+> - Maven.
+
+Geolocation Service
+-------------
+#### **Quick Start**
+ 
+* Clone and run:
 ```
-curl -X POST -H "Content-Type: application/json" -d '{
-	"latitude": "100",
-	"longitude": "200",
-	"altitude": "800",
-    "deviceId": "68e4587b-14e6-4c2d-a85f-9a0c78ac2c6d",
-    "time":"2017-02-01T14:45:00+0800"
-}' "http://localhost:8080/api/tracking-record/"
+git clone https://github.com/leonardoluiz/lokithor.git
+cd geotracking-service
+mvn package
+java -jar <myapp>-swarm.jar
 ```
-* Take a look at console output
+
+* Verify if it's running:
+```
+// Request
+curl -X GET http://localhost:8080/version 
+```
+* You should get this response:
+```
+// Response
+{
+    "version": "v 0.0.1"
+}
+```
+
+* Create a record for the previously created device '68e4587b-14e6-4c2d-a85f-9a0c78ac2c6d':
+```
+// Request
+curl -X POST \
+  http://localhost:8080/records \
+  -H 'content-type: application/json' \
+  -d '{	
+	"latitude": "-44.0342618",	
+	"longitude": "-19.9025411",	
+	"altitude": "800",    
+	"deviceId": "'68e4587b-14e6-4c2d-a85f-9a0c78ac2c6d'",    
+	"time":"2017-02-01T14:45:00+0800" 
+}'
+``` 
+
+* Get the location of all active devices:
+```
+// Request
+curl -X GET http://localhost:8080/records/current
+```
+```
+// Response
+[  
+   {  
+      "id":"c1415652-f76f-4d27-83df-e582bf09a256",
+      "latitude":-44.034264,
+      "longitude":-19.90254,
+      "altitude":800.0,
+      "time":"Jun 16, 2017 2:26:42 PM",
+      "deviceId":"1"
+   },
+   {  
+      "id":"beb710b4-5cc5-4a54-9526-652041e9529e",
+      "latitude":-44.034264,
+      "longitude":-19.90254,
+      "altitude":900.0,
+      "time":"Jun 16, 2017 2:29:19 PM",
+      "deviceId":"2"
+   }
+]
+``` 
+
+Dashboard Service
+-------------
+#### **Quick Start**
+ 
+* Clone
+```
+git clone https://github.com/leonardoluiz/lokithor.git
+```
+* Get a valid google maps API key: https://developers.google.com/maps/documentation/javascript/get-api-key
+
+* Set the enviroment variables:
+```
+// get a valid google maps API key
+// https://developers.google.com/maps/documentation/javascript/get-api-key
+
+export MAPS_KEY=your-api-key
+export GEOTRACKING_URL=your-geolocation-service-url. (e.g., http://localhost:8080/)
+
+```
+
+* Build and run:
+```
+cd dashboard-service
+mvn package
+java -jar dashboard-service-swarm.jar -Dswarm.port.offset=1
+```
+
+
+
+
+* Verify if it's running on http://localhost:8081
