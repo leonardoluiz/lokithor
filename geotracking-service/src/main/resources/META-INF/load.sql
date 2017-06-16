@@ -1,1 +1,1 @@
-insert into device (deviceId) values ('123456');
+insert into device (deviceId) values ('68e4587b-14e6-4c2d-a85f-9a0c78ac2c6d');
