@@ -1,0 +1,6 @@
+geolocation:
+  service:
+    url: http://localhost:8080/
+swarm:
+    port:
+      offset: 1
