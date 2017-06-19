@@ -22,9 +22,6 @@ public class DeviceLocation {
 	private static final Logger LOG = Logger.getLogger(DeviceLocation.class);
 
 	@Inject
-	private Properties properties;
-	
-	@Inject
 	@ConfigurationValue("geolocation.service.url")
 	private String geolocationUrl;
 
