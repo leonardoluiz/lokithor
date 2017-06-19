@@ -4,9 +4,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.lokithor</groupId>
-    <artifactId>geotracking-service</artifactId>
+    <artifactId>geolocation-service</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Lokithor - Geotracking Service</name>
+    <name>Lokithor - Geolocation Service</name>
     <packaging>war</packaging>
 
     <properties>
@@ -31,7 +31,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>geotracking-service</finalName>
+        <finalName>geolocation-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>

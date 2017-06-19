@@ -26,7 +26,7 @@ Geolocation Service
 git clone https://github.com/leonardoluiz/lokithor.git
 cd geotracking-service
 mvn package
-java -jar <myapp>-swarm.jar
+java -jar geolocation-service-swarm.jar
 ```
 
 * Verify if it's running:
@@ -92,26 +92,11 @@ Dashboard Service
 ```
 git clone https://github.com/leonardoluiz/lokithor.git
 ```
-* Get a valid google maps API key: https://developers.google.com/maps/documentation/javascript/get-api-key
-
-* Set the enviroment variables:
-```
-// get a valid google maps API key
-// https://developers.google.com/maps/documentation/javascript/get-api-key
-
-export MAPS_KEY=your-api-key
-export GEOTRACKING_URL=your-geolocation-service-url. (e.g., http://localhost:8080/)
-
-```
-
 * Build and run:
 ```
 cd dashboard-service
 mvn package
-java -jar dashboard-service-swarm.jar -Dswarm.port.offset=1
+java -jar dashboard-service-swarm.jar
 ```
-
-
-
 
 * Verify if it's running on http://localhost:8081
