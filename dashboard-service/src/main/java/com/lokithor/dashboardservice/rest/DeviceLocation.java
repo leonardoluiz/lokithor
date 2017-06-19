@@ -1,9 +1,9 @@
 package com.lokithor.dashboardservice.rest;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.inject.Inject;
-import javax.json.JsonArray;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -13,22 +13,31 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
+
 @Path("/devicelocation")
 public class DeviceLocation {
+	
+	private static final Logger LOG = Logger.getLogger(DeviceLocation.class);
 
 	@Inject
 	private Properties properties;
+	
+	@Inject
+	@ConfigurationValue("geolocation.service.url")
+	private String geolocationUrl;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response doGet() {
-
+		
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target(properties.getProperty("geotracking-service-url")).path("record/current");
+		WebTarget target = client.target(geolocationUrl).path("records/current");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
 		if (response.getStatus() == 200) {
-			JsonArray json = response.readEntity(JsonArray.class);
-			return Response.ok().entity(json.toString()).build();
+			ArrayList<?> json = response.readEntity(ArrayList.class);
+			return Response.ok().entity(json).build();
 		} else {
 			return Response.serverError().build();
 		}
